@@ -12,7 +12,7 @@ def run_bretagnizer(input_path,
                     epochs,
                     batch_size,
                     embedding_size):
-    inputs = load_inputs(input_path)
+    inputs = load_inputs(input_path, const.COMMUNE_NAME_COL)
     voc, voc_size = get_vocab_and_size(inputs)
     char_to_idx, idx_to_char = get_mappings(voc)
     train_x, train_y = build_n_grams(inputs, char_to_idx, n=3)
@@ -29,15 +29,15 @@ def run_bretagnizer(input_path,
         train_batch_x, train_batch_y = get_batch_idx(train_x, train_y, batch_size)
         logits, loss = model.forward(train_batch_x, train_batch_y)
         model.backward(loss)
-        if epoch % 100 == 0:
+        if epoch % 1000 == 0:
             print(f"Epoch {epoch}: loss = {loss}")
-            for _ in range(10):
-                print(model.sample_from_distribution(idx_to_char))
+    for _ in range(10):
+        print(model.sample_from_distribution(idx_to_char))
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument("--input_path", type=str, default="../data/communes-france.csv")
+    parser.add_argument("--input_path", type=str, default="data/communes-france.csv")
     parser.add_argument("--block_size", type=str, default=const.BLOCK_SIZE)
     parser.add_argument("--hidden_size", type=str, default=const.HIDDEN_SIZE)
     parser.add_argument("--learning_rate", type=str, default=const.LEARNING_RATE)

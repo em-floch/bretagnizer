@@ -22,7 +22,7 @@ class MultilayerPerceptron:
         emb = self.embedding[train_batch_x]
         hidden = torch.tanh(emb.view(-1, self.embedding_size * self.block_size) @ self.w1 + self.b1)
         logits = hidden @ self.w2 + self.b2
-        loss = torch.nn.functional.cross_entropy(logits, train_batch_y)
+        loss = torch.nn.functional.cross_entropy(logits, torch.tensor(train_batch_y))
         return logits, loss
 
     def backward(self, loss):
@@ -50,4 +50,4 @@ class MultilayerPerceptron:
             word.append(idx_to_char[idx])
             context = context[1:] + [idx]
 
-        return word
+        return ''.join(word)

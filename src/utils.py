@@ -1,12 +1,11 @@
 import pandas as pd
-import constants as const
 import random
 
 
-def load_inputs(input_path):
+def load_inputs(input_path, col_name):
     """Load the inputs from the csv file into a list of names"""
     df = pd.read_csv(input_path, sep=";")
-    inputs = list(df[const.COMMUNE_NAME_COL].values)
+    inputs = list(df[col_name].values)
     return inputs
 
 def get_vocab_and_size(input_texts):
