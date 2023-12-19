@@ -1,0 +1,11 @@
+
+
+COMMUNE_NAME_COL = "Nom Officiel Commune Minuscule"
+
+# MLP Parameters
+EMBEDDING_SIZE = 2
+BLOCK_SIZE = 3
+HIDDEN_SIZE = 30
+LEARNING_RATE = 0.1
+EPOCHS = 1000
+BATCH_SIZE = 100
